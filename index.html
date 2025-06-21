@@ -1,225 +1,388 @@
-<!DOCTYPE html>
-<html lang="id">
+<!DOCTYPE html><html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Xyzdik Store</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Xyzdik Hosting</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      padding: 0;
-      background: #000;
+      font-family: 'VT323', 'Orbitron', sans-serif;
+      background: #0f0f0f url('https://files.catbox.moe/lh1h4n.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
       overflow-x: hidden;
-    }
+      min-height: 100vh;
+    }h1 {
+  text-align: center;
+  padding: 1rem;
+  font-size: 3.2rem;
+  color: #000;
+  animation: flickerColors 4s infinite;
+}
 
-    .cyber-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: repeating-linear-gradient(
-        45deg,
-        #0ff,
-        #0ff 1px,
-        #000 1px,
-        #000 20px
-      );
-      background-size: 40px 40px;
-      animation: cyberMove 10s linear infinite;
-      z-index: 0;
-      opacity: 0.2;
-    }
+.produk-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 2rem;
+}
 
-    @keyframes cyberMove {
-      0% {
-        background-position: 0 0;
-      }
-      100% {
-        background-position: 1000px 1000px;
-      }
-    }
+.produk-item {
+  width: 280px;
+  margin: 1rem;
+  background: rgba(0, 0, 0, 0.6);
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
 
-    .container {
-      max-width: 1200px;
-      margin: auto;
-      padding: 20px;
-      position: relative;
-      z-index: 1;
-    }
+.produk-item:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #0ff;
+}
 
-    h1 {
-      text-align: center;
-      margin-bottom: 40px;
-      color: #0ff;
-      text-shadow: 0 0 5px #0ff, 0 0 10px #00f;
-    }
+.produk-img {
+  width: 100%;
+  height: 280px;
+  object-fit: cover;
+  aspect-ratio: 1 / 1;
+}
 
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 20px;
-    }
+.produk-nama, .produk-harga {
+  font-size: 1.6rem;
+  padding: 0.5rem;
+  text-align: center;
+  color: #000;
+  animation: flickerColors 5s infinite;
+}
 
-    .product-card {
-      background: rgba(0, 0, 0, 0.8);
-      border: 1px solid #0ff;
-      border-radius: 10px;
-      box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
-      overflow: hidden;
-      transition: transform 0.2s;
-    }
+.produk-tombol {
+  text-align: center;
+  padding: 1rem;
+}
 
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
+.produk-tombol button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background-color: #0ff;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .product-image img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-    }
+.produk-tombol button:hover {
+  background-color: #00f;
+  color: #fff;
+  box-shadow: 0 0 10px #00f;
+}
 
-    .product-info {
-      padding: 15px;
-      color: #eee;
-    }
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: #000;
+  font-size: 1.1rem;
+  animation: flickerColors 6s infinite;
+}
 
-    .product-name {
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 10px;
-      color: #0ff;
-    }
+#loginOverlay {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.9);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-    .product-desc {
-      font-size: 14px;
-      color: #ccc;
-      margin-bottom: 10px;
-    }
+.login-box {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 2px solid #0ff;
+  text-align: center;
+  box-shadow: 0 0 20px #0ff;
+}
 
-    .product-price {
-      font-size: 16px;
-      color: #f0f;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
+.login-box input {
+  display: block;
+  margin: 1rem auto;
+  padding: 0.7rem;
+  width: 80%;
+  border-radius: 5px;
+  border: 1px solid #0ff;
+  font-size: 1rem;
+  background: #000;
+  color: #0ff;
+  text-align: center;
+}
 
-    .buy-btn {
-      display: block;
-      text-align: center;
-      background: #00f;
-      color: white;
-      padding: 10px;
-      border-radius: 5px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-    }
+.login-box button {
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  border: none;
+  border-radius: 5px;
+  background: #0ff;
+  color: #000;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.3s;
+}
 
-    .buy-btn:hover {
-      background: #0ff;
-      color: #000;
-    }
+.login-box button:hover {
+  background: #00f;
+  color: #fff;
+  box-shadow: 0 0 10px #00f;
+}
+
+.login-box h2, .login-box p {
+  color: #000;
+  font-size: 1.3rem;
+  animation: flickerColors 5s infinite;
+}
+
+@keyframes flickerColors {
+  0%   { color: #ff00cc; text-shadow: 0 0 5px #ff00cc; }
+  25%  { color: #00ffff; text-shadow: 0 0 5px #00ffff; }
+  50%  { color: #ffff00; text-shadow: 0 0 5px #ffff00; }
+  75%  { color: #00ff00; text-shadow: 0 0 5px #00ff00; }
+  100% { color: #ff00cc; text-shadow: 0 0 5px #ff00cc; }
+}
+
+#welcomePopup {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+}
+
+#welcomeText {
+  font-size: 2.5rem;
+  color: #0ff;
+  font-weight: bold;
+  border-right: 2px solid #0ff;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+  animation: typing 3s steps(30, end) forwards, blink 0.7s step-end infinite;
+}
+
+@keyframes typing {
+  from { width: 0 }
+  to { width: 100% }
+}
+
+@keyframes blink {
+  50% { border-color: transparent }
+}
+
+/* --- Bagian Payment --- */
+#paymentSection {
+  display: none;
+  max-width: 700px;
+  margin: 2rem auto 3rem auto;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #0ff;
+  border-radius: 10px;
+  padding: 1.5rem 2rem;
+  color: #000;
+  animation: flickerColors 5s infinite;
+}
+
+#paymentSection h2 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 1.2rem;
+  color: #000;
+  animation: flickerColors 4s infinite;
+}
+
+#paymentSection label {
+  display: block;
+  font-size: 1.2rem;
+  margin: 1rem 0 0.3rem 0;
+  color: #000;
+}
+
+#paymentSection input, #paymentSection select {
+  width: 100%;
+  padding: 0.6rem;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 1px solid #0ff;
+  background: #000;
+  color: #0ff;
+}
+
+#paymentSection button {
+  margin-top: 1.5rem;
+  width: 100%;
+  padding: 0.7rem;
+  font-size: 1.2rem;
+  background: #0ff;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  color: #000;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#paymentSection button:hover {
+  background: #00f;
+  color: #fff;
+  box-shadow: 0 0 10px #00f;
+}
+
   </style>
 </head>
-<body>
-
-<div class="cyber-bg"></div> <!-- Latar belakang cyber -->
-
-<div class="container">
-  <h1>Daftar Produk Xyzdik</h1>
-  <div class="product-grid">
-    
-    <!-- Produk 1 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/fb61fq.jpg" alt="Produk 1">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Jasa Rename Script</div>
-        <div class="product-desc">Xyzdik Open Jasa Rename script.</div>
-        <div class="product-price">Rp15.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+buy+jasa+rename" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-
-    <!-- Produk 2 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/hsdy0z.jpg" alt="Produk 2">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Open All Panel</div>
-        <div class="product-desc">    Resseler (8k)
-          Partner (15k)
-          Owner (20k).</div>
-        <div class="product-price">Rp43.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+join+res/pt/owner+panel" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-
-    <!-- Produk 3 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/vd6fkb.jpg" alt="Produk 3">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Script Bug Nika</div>
-        <div class="product-desc">Open script Bug.</div>
-        <div class="product-price">Rp35.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+buy+sc+bug+nika" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-    
-        <!-- Produk 4 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/aputlj.jpg" alt="Produk 4">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Murbug Via Telegram</div>
-        <div class="product-desc">Open Murbug Privat Yang di pakai pastinya Sc Gacor.</div>
-        <div class="product-price">Rp10.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+join+murbug" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-    
-        <!-- Produk 5 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/1xlp57.jpg" alt="Produk 5">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Mursc via Tele/Wa</div>
-        <div class="product-desc">Open Murid Sc Privat/Public.</div>
-        <div class="product-price">Rp25.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+join+mursc" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-    
-        <!-- Produk 6 -->
-    <div class="product-card">
-      <div class="product-image">
-        <img src="https://files.catbox.moe/z26536.jpg" alt="Produk 6">
-      </div>
-      <div class="product-info">
-        <div class="product-name">Jasa Buat Web Store</div>
-        <div class="product-desc">Open Jasa Buat Html Web Store.</div>
-        <div class="product-price">Rp20.000</div>
-        <a href="https://wa.me/6281216493076?text=Bang+buy+jasa+buat+WebStore" class="buy-btn">Beli Sekarang</a>
-      </div>
-    </div>
-
-    <!-- Produk-produk kamu di sini (tidak diubah untuk ringkasnya) -->
-
+<body><!-- Login --><div id="loginOverlay">
+  <div class="login-box">
+    <h2>Login Terlebih dahulu</h2>
+    <input type="text" id="XYZDIK" placeholder="UserName = Dika" />
+    <input type="password" id="DIKAGANTENG" placeholder="Password = dika" />
+    <button onclick="cekLogin()">Masuk</button>
+    <p id="loginError"></p>
   </div>
-</div>
+</div><!-- Welcome --><div id="welcomePopup">
+  <div id="welcomeText">Selamat Datang mek!</div>
+</div><!-- Produk Section --><section id="produkSection" class="produk-container" style="display:none;">
+  <h1>Produk Hosting Xyzdik</h1>  <div class="produk-item" data-kategori="hosting" data-aos="fade-up">
+    <img src="https://files.catbox.moe/hsdy0z.jpg" class="produk-img" />
+    <div class="produk-nama">Res/Pt/Own Panel</div>
+    <div class="produk-harga">Rp 8.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Res/Pt/Own Panel', '8000')">Beli</button></div>
+  </div>
+  <div class="produk-item" data-kategori="hosting" data-aos="fade-up">
+    <img src="https://files.catbox.moe/xrxgza.jpg" class="produk-img" />
+    <div class="produk-nama">Jasa Buat Web Store & Payment</div>
+    <div class="produk-harga">Rp 20.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Jasa Buat Web Store & Payment', '20000')">Beli</button></div>
+  </div>
+  <div class="produk-item" data-kategori="domain" data-aos="fade-up">
+    <img src="https://files.catbox.moe/fb61fq.jpg" class="produk-img" />
+    <div class="produk-nama">Murid Buat Sc</div>
+    <div class="produk-harga">Rp 15.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Murid Buat Sc', '15000')">Beli</button></div>
+  </div>
+  <div class="produk-item" data-kategori="vps" data-aos="fade-up">
+    <img src="https://files.catbox.moe/aputlj.jpg" class="produk-img" />
+    <div class="produk-nama">Murid Bug Via Telegram</div>
+    <div class="produk-harga">Rp 20.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Murid Bug Via Telegram', '20000')">Beli</button></div>
+  </div>
+  <div class="produk-item" data-kategori="ssl" data-aos="fade-up">
+    <img src="https://files.catbox.moe/pcxnzk.jpg" class="produk-img" />
+    <div class="produk-nama">Resseler Nika</div>
+    <div class="produk-harga">Rp 75.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Resseler Nika', '75000')">Beli</button></div>
+  </div>
+  <div class="produk-item" data-kategori="panel" data-aos="fade-up">
+    <img src="https://files.catbox.moe/vd6fkb.jpg" class="produk-img" />
+    <div class="produk-nama">Script Bug Nika New</div>
+    <div class="produk-harga">Rp 40.000</div>
+    <div class="produk-tombol"><button onclick="openPayment('Script Bug Nika New', '40000')">Beli</button></div>
+  </div>
+</section><!-- Payment Section --><section id="paymentSection">
+  <h2>Xyzdik Payment</h2>
+  <form id="paymentForm" onsubmit="return prosesPembayaran(event)">
+    <label for="productName">Produk</label>
+    <input type="text" id="productName" name="productName" readonly /><label for="productPrice">Harga (Rp)</label>
+<input type="text" id="productPrice" name="productPrice" readonly />
 
-</body>
+<label for="namaPembeli">Nama Pembeli</label>
+<input type="text" id="namaPembeli" name="namaPembeli" required />
+
+<label for="metodePembayaran">Metode Pembayaran</label>
+<select id="metodePembayaran" name="metodePembayaran" required>
+  <option value="">Pilih metode</option>
+  <option value="DANA">DANA</option>
+  <option value="QRIS">QRIS</option>
+</select>
+
+<button type="submit">Bayar Sekarang</button>
+
+  </form>
+</section><footer>
+  &copy; 2025 Toko Xyzdik | ALL MURAH
+</footer><script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script><script>
+  AOS.init({ duration: 1000 });
+</script><script>
+  // Login logic (as original)
+  const usernameBenar = "Dika";
+  const passwordBenar = "dika";
+  const loginSound = new Audio("https://files.catbox.moe/nprz25.mpga");
+
+  function cekLogin() {
+    const user = document.getElementById("XYZDIK").value;
+    const pass = document.getElementById("DIKAGANTENG").value;
+    const err = document.getElementById("loginError");
+
+    loginSound.play();
+
+    if (user === usernameBenar && pass === passwordBenar) {
+      document.getElementById("welcomePopup").style.display = "flex";
+      setTimeout(() => {
+        document.getElementById("welcomePopup").style.display = "none";
+        document.getElementById("loginOverlay").style.display = "none";
+        document.getElementById("produkSection").style.display = "flex";
+      }, 3000);
+    } else {
+      err.textContent = "Masukin Password yang benar";
+      err.style.color = "red";
+    }
+  }
+
+  // Produk beli -> buka halaman payment dengan data produk
+  function openPayment(nama, harga) {
+    const audio = new Audio("https://cdn.pixabay.com/audio/2022/03/15/audio_3a8fb0d6b6.mp3");
+    audio.play();
+    setTimeout(() => {
+      document.getElementById("produkSection").style.display = "none";
+      document.getElementById("paymentSection").style.display = "block";
+      document.getElementById("productName").value = nama;
+      document.getElementById("productPrice").value = harga;
+    }, 300);
+  }
+
+// Proses pembayaran (dummy)
+function prosesPembayaran(e) {
+  e.preventDefault();
+
+  const produk = document.getElementById("productName").value;
+  const harga = document.getElementById("productPrice").value;
+  const nama = document.getElementById("namaPembeli").value;
+  const metode = document.getElementById("metodePembayaran").value;
+
+  // Format pesan WhatsApp
+  const pesan = encodeURIComponent(
+    `Halo, saya ingin melakukan pembayaran:\n\n` +
+    ` 🛒 Produk: ${produk}\n 💸 Harga: Rp ${harga}\n 🧑 Nama Pembeli: ${nama}\n 💳 Metode Pembayaran: ${metode}`
+  );
+
+  // Ganti nomor berikut dengan nomor WhatsApp tujuan (awali dengan 62)
+  const nomorWhatsApp = "6281216493076";
+  const urlWA = `https://wa.me/${nomorWhatsApp}?text=${pesan}`;
+
+  // Buka WhatsApp di tab baru
+  window.open(urlWA, '_blank');
+
+  // Setelah bayar, kembali ke halaman produk
+  document.getElementById("paymentSection").style.display = "none";
+  document.getElementById("produkSection").style.display = "flex";
+}
+</script></body>
 </html>
