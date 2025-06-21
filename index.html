@@ -6,6 +6,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=VT323&display=swap" rel="stylesheet" />
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
+  #bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  z-index: -1;
+  object-fit: cover;
+}
     body {
       margin: 0;
       font-family: 'VT323', 'Orbitron', sans-serif;
@@ -246,10 +255,22 @@ footer {
   color: #fff;
   box-shadow: 0 0 10px #00f;
 }
-
+#bgVideo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: -1;
+}
   </style>
 </head>
-<body><!-- Login --><div id="loginOverlay">
+<body><!-- Login -->
+<video autoplay muted loop id="bgVideo">
+  <source src="https://files.catbox.moe/i6xmqm.mp4" type="video/mp4">
+</video>
+<div id="loginOverlay">
   <div class="login-box">
     <h2>Login Terlebih dahulu</h2>
     <input type="text" id="XYZDIK" placeholder="UserName = Dika" />
@@ -273,7 +294,7 @@ footer {
     <div class="produk-tombol"><button onclick="openPayment('Jasa Buat Web Store & Payment', '20000')">Beli</button></div>
   </div>
   <div class="produk-item" data-kategori="domain" data-aos="fade-up">
-    <img src="https://files.catbox.moe/fb61fq.jpg" class="produk-img" />
+    <img src="https://files.catbox.moe/1xlp57.jpg" class="produk-img" />
     <div class="produk-nama">Murid Buat Sc</div>
     <div class="produk-harga">Rp 15.000</div>
     <div class="produk-tombol"><button onclick="openPayment('Murid Buat Sc', '15000')">Beli</button></div>
@@ -296,6 +317,12 @@ footer {
     <div class="produk-harga">Rp 40.000</div>
     <div class="produk-tombol"><button onclick="openPayment('Script Bug Nika New', '40000')">Beli</button></div>
   </div>
+  <div class="produk-item" data-kategori="panel" data-aos="fade-up">
+  <img src="https://files.catbox.moe/fb61fq.jpg" class="produk-img" />
+  <div class="produk-nama">Jasa Rename Sc</div>
+  <div class="produk-harga">Rp 20.000</div>
+  <div class="produk-tombol"><button onclick="openPayment('Hosting Panel Unlimited', '100000')">Beli</button></div>
+</div>
 </section><!-- Payment Section --><section id="paymentSection">
   <h2>Xyzdik Payment</h2>
   <form id="paymentForm" onsubmit="return prosesPembayaran(event)">
@@ -325,6 +352,7 @@ footer {
   const usernameBenar = "Dika";
   const passwordBenar = "dika";
   const loginSound = new Audio("https://files.catbox.moe/nprz25.mpga");
+loginSound.loop = true; // <<< ini bikin suaranya muter terus
 
   function cekLogin() {
     const user = document.getElementById("XYZDIK").value;
